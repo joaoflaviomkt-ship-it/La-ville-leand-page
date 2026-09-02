@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="La Ville Burger — Hambúrgueria Premium">
+  <title>LA VILLE | Hambúrgueria Premium</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #080808;
+      --black-2: #111111;
+      --gold: #d9a83d;
+      --gold-light: #f1c96b;
+      --cream: #f5f1e8;
+      --white: #ffffff;
+      --muted: #b9b5ad;
+      --line: rgba(217, 168, 61, .35);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 80% 5%, rgba(217,168,61,.10), transparent 25%),
+        radial-gradient(circle at 10% 45%, rgba(255,255,255,.035), transparent 28%),
+        linear-gradient(145deg, #050505, #121212 50%, #070707);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 22px 18px 45px;
+    }
+
+    /* CABEÇALHO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 410px;
+      border: 1px solid var(--line);
+      border-radius: 0 0 70px 70px;
+      background:
+        radial-gradient(circle at 82% 30%, rgba(217,168,61,.20), transparent 25%),
+        linear-gradient(120deg, #050505 0%, #111 55%, #080808 100%);
+      padding: 48px 30px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      box-shadow: 0 25px 70px rgba(0,0,0,.45);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -110px;
+      bottom: -100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,168,61,.25), transparent 65%);
+      pointer-events: none;
+    }
+
+    .burger-symbol {
+      width: 74px;
+      height: 58px;
+      position: relative;
+      margin: 0 auto 22px;
+      align-self: center;
+    }
+
+    .burger-symbol span {
+      position: absolute;
+      left: 8px;
+      width: 58px;
+      height: 7px;
+      border: 3px solid var(--gold-light);
+      border-radius: 20px;
+    }
+
+    .burger-symbol span:nth-child(1) {
+      top: 3px;
+      height: 31px;
+      border-radius: 50px 50px 15px 15px;
+    }
+
+    .burger-symbol span:nth-child(2) { top: 34px; }
+    .burger-symbol span:nth-child(3) { top: 47px; }
+
+    .hero h1 {
+      width: 100%;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 10vw, 78px);
+      font-weight: 500;
+      letter-spacing: 10px;
+      color: var(--gold-light);
+      line-height: .95;
+    }
+
+    .hero .subtitle {
+      width: 100%;
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      letter-spacing: 7px;
+      color: #eee;
+      font-weight: 600;
+    }
+
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 390px;
+      margin: 25px auto 0;
+    }
+
+    .gold-divider::before,
+    .gold-divider::after {
+      content: "";
+      height: 1px;
+      background: var(--gold);
+      flex: 1;
+      opacity: .8;
+    }
+
+    .diamond {
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .slogan {
+      width: 100%;
+      text-align: center;
+      margin-top: 24px;
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .slogan em {
+      display: block;
+      color: var(--gold-light);
+      font-size: 26px;
+    }
+
+    .heart {
+      display: block;
+      color: var(--gold-light);
+      font-size: 30px;
+      margin-top: 13px;
+    }
+
+    /* BOTÕES */
+    .actions {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .action-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-height: 145px;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
+        #111;
+      box-shadow: 0 15px 35px rgba(0,0,0,.30);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .action-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(241,201,107,.75);
+      background: linear-gradient(145deg, rgba(217,168,61,.09), rgba(255,255,255,.02)), #111;
+    }
+
+    .action-icon {
+      flex: 0 0 88px;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      border: 1px solid rgba(217,168,61,.55);
+      background: radial-gradient(circle, #1c1c1c, #090909);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      box-shadow: inset 0 0 20px rgba(217,168,61,.06);
+    }
+
+    .action-icon svg {
+      width: 45px;
+      height: 45px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .action-content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .action-content h2 {
+      font-size: 21px;
+      letter-spacing: .5px;
+      margin-bottom: 7px;
+    }
+
+    .action-content p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .phone {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 7px 12px;
+      border: 1px solid rgba(217,168,61,.7);
+      border-radius: 30px;
+      color: var(--gold-light) !important;
+      font-weight: 600;
+    }
+
+    .arrow {
+      flex: 0 0 50px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--gold-light), #b98520);
+      color: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 300;
+      box-shadow: 0 8px 25px rgba(217,168,61,.18);
+    }
+
+    /* IFOOD */
+    .ifood-icon {
+      font-family: Arial, sans-serif;
+      font-size: 25px;
+      font-weight: 900;
+      font-style: italic;
+      color: #e90016;
+      letter-spacing: -2px;
+    }
+
+    .ifood-smile {
+      display: block;
+      width: 25px;
+      height: 9px;
+      border-bottom: 3px solid #e90016;
+      border-radius: 50%;
+      margin-top: -3px;
+    }
+
+    /* RODAPÉ */
+    footer {
+      padding-top: 35px;
+      text-align: center;
+    }
+
+    footer .gold-divider {
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    .footer-brand {
+      color: var(--gold-light);
+      font-family: Georgia, serif;
+      letter-spacing: 7px;
+      font-size: 14px;
+    }
+
+    .footer-small {
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-top: 12px;
+    }
+
+    /* CELULAR */
+    @media (max-width: 560px) {
+      .page {
+        padding: 0 12px 30px;
+      }
+
+      .hero {
+        min-height: 390px;
+        padding: 38px 20px 40px;
+        border-radius: 0 0 45px 45px;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+        letter-spacing: 6px;
+      }
+
+      .hero .subtitle {
+        font-size: 10px;
+        letter-spacing: 4px;
+      }
+
+      .slogan {
+        font-size: 19px;
+      }
+
+      .slogan em {
+        font-size: 22px;
+      }
+
+      .action-card {
+        min-height: 125px;
+        padding: 16px;
+        gap: 14px;
+        border-radius: 24px;
+      }
+
+      .action-icon {
+        flex-basis: 68px;
+        width: 68px;
+        height: 68px;
+      }
+
+      .action-icon svg {
+        width: 34px;
+        height: 34px;
+      }
+
+      .action-content h2 {
+        font-size: 17px;
+        margin-bottom: 5px;
+      }
+
+      .action-content p {
+        font-size: 13px;
+      }
+
+      .arrow {
+        flex-basis: 42px;
+        width: 42px;
+        height: 42px;
+        font-size: 25px;
+      }
+
+      .phone {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <section class="hero">
+      <div class="burger-symbol" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <h1>LA VILLE</h1>
+      <p class="subtitle">HAMBURGUERIA PREMIUM</p>
+
+      <div class="gold-divider">
+        <span class="diamond"></span>
+      </div>
+
+      <p class="slogan">
+        Sabor que conquista,
+        <em>experiência que fica.</em>
+        <span class="heart">♡</span>
+      </p>
+    </section>
+
+    <section class="actions" aria-label="Acessos">
+
+      <!-- CARDÁPIO -->
+      <a class="action-card" href="cardapio.html">
+        <div class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M10 31h44"/>
+            <path d="M14 26c2-10 10-15 18-15s16 5 18 15"/>
+            <path d="M12 37h40"/>
+            <path d="M15 44h34"/>
+            <path d="M19 51h26"/>
+          </svg>
+        </div>
+
+        <div class="action-content">
+          <h2>ACESSE O CARDÁPIO</h2>
+          <p>Confira nossos hambúrgueres, combos, batatas e bebidas.</p>
+        </div>
+
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- WHATSAPP -->
+      <a class="action-card"
+         href="https://wa.me/5586995120634?text=Ol%C3%A1%20La%20Ville%21%20Gostaria%20de%20fazer%20um%20pedido."
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <div class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M32 10a22 22 0 0 0-19 33l-3 11 11-3a22 22 0 1 0 11-41z"/>
+            <path d="M24 22c1-2 3-2 4 0l2 4c1 2-1 3-2 4 2 4 5 6 9 8 1-1 2-3 4-2l4 2c2 1 1 4 0 5-2 2-5 2-8 1-7-2-14-9-16-16-1-3-1-5 1-6z"/>
+          </svg>
+        </div>
+
+        <div class="action-content">
+          <h2>FALE CONOSCO</h2>
+          <p>Tire dúvidas ou faça seu pedido pelo WhatsApp.</p>
+          <span class="phone">(86) 9 9512-0634</span>
+        </div>
+
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- LOCALIZAÇÃO -->
+      <a class="action-card"
+         href="https://www.google.com/maps/place/Espa%C3%A7o+F%C3%ADsico/@-5.0658446,-42.776812,18.75z/data=!4m6!3m5!1s0x78e3a2fb4462d75:0xa438701687778c23!8m2!3d-5.0664108!4d-42.7773719!16s%2Fg%2F11q3z6p16l?entry=ttu&g_ep=EgoyMDI2MDgyNi4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <div class="action-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M32 57s18-17 18-31a18 18 0 1 0-36 0c0 14 18 31 18 31z"/>
+            <circle cx="32" cy="25" r="6"/>
+          </svg>
+        </div>
+
+        <div class="action-content">
+          <h2>NOSSA LOCALIZAÇÃO</h2>
+          <p>Venha nos visitar e viva essa experiência única.</p>
+        </div>
+
+        <span class="arrow">›</span>
+      </a>
+
+      <!-- IFOOD -->
+      <a class="action-card"
+         href="https://www.ifood.com.br/delivery/teresina-pi/la-ville-burger-horto/2694799c-5f72-4ff8-8a27-9049af716129?utm_medium=share"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <div class="action-icon" aria-hidden="true">
+          <div>
+            <div class="ifood-icon">iFood</div>
+            <span class="ifood-smile"></span>
+          </div>
+        </div>
+
+        <div class="action-content">
+          <h2>PEÇA PELO IFOOD</h2>
+          <p>Peça agora mesmo e receba no conforto da sua casa.</p>
+        </div>
+
+        <span class="arrow">›</span>
+      </a>
+
+    </section>
+
+    <footer>
+      <div class="gold-divider">
+        <span class="diamond"></span>
+      </div>
+
+      <div class="footer-brand">LA VILLE</div>
+      <div class="footer-small">HAMBURGUERIA PREMIUM</div>
+    </footer>
+
+  </main>
+</body>
+</html>
